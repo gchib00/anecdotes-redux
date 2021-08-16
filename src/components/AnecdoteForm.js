@@ -1,13 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-
-
-const addAnecdote = (event) => {
-  event.preventDefault()
-  const content = event.target.content.value
-  event.target.content.value = ''
-  return({type: 'ADD_ANECDOTE', anecdote: content})
-}
+import { addAnecdote } from '../reducers/anecdoteReducer'
 
 const  AnecdoteForm = () => {
   const dispatch = useDispatch()
