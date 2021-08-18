@@ -4,29 +4,32 @@ const anecdoteReducer = (state = initialState, action) => {
   switch(action.type) {
     case 'VOTE_ADDED': {
       const newState=`You voted for: ${action.anecdoteContent}`
-      console.log(newState)
       return newState
     }
-    case 'REMOVE_NOTIFICATION': {
-      const newState = ''
-      return newState
+    case 'HIDE_NOTIFICATION': {
+      return ''
     }
     default: 
       return state
   }
 }
 
-export const notifyVoteSuccess = async (content) => {
+export const notifyVoteSuccess = (content) => {
   return{
     type: 'VOTE_ADDED',
     anecdoteContent: content
   }
 }
-export const removeNotification = () => {
-  return{
-    type: 'REMOVE_NOTIFICATION'
-  }
-}
 
+export const hideNotification = () => {
+  return dispatch => {
+    setTimeout(() => 
+      dispatch({type: 'HIDE_NOTIFICATION'})
+    , 4000)
+  } 
+  // return{
+  //   type: 'HIDE_NOTIFICATION'
+  // } 
+}
 
 export default anecdoteReducer
