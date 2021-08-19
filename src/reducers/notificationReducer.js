@@ -22,14 +22,10 @@ export const notifyVoteSuccess = (content) => {
 }
 
 export const hideNotification = () => {
-  return dispatch => {
-    setTimeout(() => 
-      dispatch({type: 'HIDE_NOTIFICATION'})
-    , 4000)
+  return{
+    type: 'HIDE_NOTIFICATION'
   } 
-  // return{
-  //   type: 'HIDE_NOTIFICATION'
-  // } 
 }
+
 
 export default anecdoteReducer
