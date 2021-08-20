@@ -5,7 +5,11 @@ import {notifyVoteSuccess} from '../reducers/notificationReducer'
 
 const  AnecdoteList = () => {
   const anecdotes = useSelector(state => state.anecdoteReducer)
-  anecdotes.sort((a, b) => {return b.votes - a.votes})
+  const filter = useSelector(state => state.filterReducer)
+  let filteredList = [...anecdotes]
+  filteredList = filteredList.filter(item => item.content.includes(filter))
+  filteredList = filteredList.sort((a, b) => {return b.votes - a.votes})
+
   const dispatch = useDispatch()
   const voteForItem = (id, content) => {
     dispatch(addVote(id))
@@ -13,7 +17,7 @@ const  AnecdoteList = () => {
   }
   return (
     <div>
-      {anecdotes.map(anecdote =>
+      {filteredList.map(anecdote =>
         <div key={anecdote.id}>
           <div>
             {anecdote.content}
