@@ -7,8 +7,10 @@ const  AnecdoteList = () => {
   const anecdotes = useSelector(state => state.anecdoteReducer)
   const filter = useSelector(state => state.filterReducer)
   let filteredList = [...anecdotes]
-  filteredList = filteredList.filter(item => item.content.includes(filter))
-  filteredList = filteredList.sort((a, b) => {return b.votes - a.votes})
+  try {
+    filteredList = filteredList.filter(item => item.content.includes(filter))
+    filteredList = filteredList.sort((a, b) => {return b.votes - a.votes})
+  } catch (error) {console.error(error)}
 
   const dispatch = useDispatch()
   const voteForItem = (id, content) => {
