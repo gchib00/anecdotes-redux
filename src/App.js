@@ -4,23 +4,14 @@ import AnecdoteList from './components/AnecdoteList'
 import Notification from './components/Notification'
 import Filter from './components/Filter'
 import { useSelector, useDispatch } from 'react-redux'
-import anecdoteService from './services/anecdotes'
+import { initializeAnecdotes } from './reducers/anecdoteReducer'
 
 const App = () => {
   const dispatch = useDispatch()
   const anecdotes = useSelector(state => state.anecdoteReducer)
-  console.log('anecdotes=', anecdotes)
-
 
   useEffect(() => {
-    anecdoteService.getAll().then(anecdotes => {
-      anecdotes.forEach(anecdote => {
-        dispatch({
-          type: 'ADD_ANECDOTE', 
-          data: anecdote
-        })
-      })
-    })
+    dispatch(initializeAnecdotes())
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
