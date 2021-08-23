@@ -5,7 +5,7 @@ const anecdoteReducer = (state = initialState, action) => {
     case 'VOTE_ADDED': {
       const newState=`You voted for: ${action.anecdoteContent}`
       return newState
-    }
+    } 
     case 'HIDE_NOTIFICATION': {
       return ''
     }
@@ -14,13 +14,14 @@ const anecdoteReducer = (state = initialState, action) => {
   }
 }
 
-export const notifyVoteSuccess = (content) => {
-  return{
-    type: 'VOTE_ADDED',
-    anecdoteContent: content
+export const notifyVoteSuccess = (content, timeout) => {
+  return async dispatch => {
+    dispatch({type: 'VOTE_ADDED', anecdoteContent: content})
+    setTimeout(() => {
+      dispatch({type: 'HIDE_NOTIFICATION'})
+    }, timeout)
   }
 }
-
 export const hideNotification = () => {
   return{
     type: 'HIDE_NOTIFICATION'

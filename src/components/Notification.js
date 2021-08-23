@@ -1,16 +1,8 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { hideNotification } from '../reducers/notificationReducer'
+import { useSelector } from 'react-redux'
 
 const Notification = () => {
   const notification = useSelector(state => state.notificationReducer)
-  const dispatch = useDispatch()
-
-  const removeNotif = () => {
-    dispatch(hideNotification())
-  }
-  const timeoutFn = () => setTimeout(removeNotif, 3000)
-
   const getStyle = () => {
     if (notification === ''){
       return {
@@ -18,7 +10,6 @@ const Notification = () => {
         visibility: 'hidden'
       }
     } else {
-      timeoutFn()
       return {
         border: 'solid',
         padding: 10,
@@ -26,7 +17,6 @@ const Notification = () => {
       }
     }
   }
-
   return (
     <div style={getStyle()}>
       <h2>{notification}</h2>
