@@ -1,4 +1,5 @@
 const initialState = ''
+let timeoutID = 0
 
 const anecdoteReducer = (state = initialState, action) => {
   switch(action.type) {
@@ -17,9 +18,10 @@ const anecdoteReducer = (state = initialState, action) => {
 export const notifyVoteSuccess = (content, timeout) => {
   return async dispatch => {
     dispatch({type: 'VOTE_ADDED', anecdoteContent: content})
-    setTimeout(() => {
+    clearTimeout(timeoutID)
+    timeoutID = setTimeout(() => {
       dispatch({type: 'HIDE_NOTIFICATION'})
-    }, timeout)
+    }, timeout)  
   }
 }
 export const hideNotification = () => {
